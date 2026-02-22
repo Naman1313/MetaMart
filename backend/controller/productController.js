@@ -50,3 +50,18 @@ export const deleteProduct = async(req,res)=>{
         message:"Product deleted successfully!"
     })
 }
+
+//Accessing single product
+export const getSingleProduct = async (req,res)=>{
+    const product = await Product.findById(req.params.id);
+    if(!product){
+        return res.status(500).json({
+            success:false,
+            message: "Product not found with this id"
+        })
+    }
+    res.status(200).json({
+        success:true,
+        product
+    })
+}
